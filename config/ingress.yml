@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: entrypoint
+  labels:
+    name: entrypoint
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: 100m
+spec:
+  ingressClassName: nginx
+  rules:
+  - http: 
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: riddle-guess
+            port: 
+              number: 5000

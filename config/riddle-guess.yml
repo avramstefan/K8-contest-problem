@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: riddle-guess
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: riddle-guess
+  template:
+    metadata:
+      labels:
+        app: riddle-guess
+    spec:
+      containers:
+      - name: riddle-guess
+        image: avramstefan/riddle-guess:latest
+        ports:
+        - containerPort: 5000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: riddle-guess
+spec:
+  selector:
+    app: riddle-guess
+  ports:
+  - port: 5000
+    targetPort: 5000
